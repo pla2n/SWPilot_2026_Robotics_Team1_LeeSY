@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<robot name="simple_robot">
+
+  <!-- 박스형 몸체 -->
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.5 0.3 0.2"/> <!-- 가로 0.5m, 세로 0.3m, 높이 0.2m -->
+      </geometry>
+      <material name="blue">
+        <color rgba="0.0 0.0 1.0 1.0"/> <!-- 파란색 -->
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.5 0.3 0.2"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.0"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.02" ixy="0.0" ixz="0.0" iyy="0.02" iyz="0.0" izz="0.02"/>
+    </inertial>
+  </link>
+
+  <!-- 왼쪽 바퀴 -->
+  <link name="left_wheel">
+    <visual>
+      <geometry>
+        <cylinder radius="0.05" length="0.02"/> <!-- 반지름 5cm, 길이 2cm -->
+      </geometry>
+      <material name="black">
+        <color rgba="0.0 0.0 0.0 1.0"/> <!-- 검은색 -->
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="0.05" length="0.02"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.1"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+    </inertial>
+  </link>
+
+  <!-- 오른쪽 바퀴 -->
+  <link name="right_wheel">
+    <visual>
+      <geometry>
+        <cylinder radius="0.05" length="0.02"/>
+      </geometry>
+      <material name="black">
+        <color rgba="0.0 0.0 0.0 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="0.05" length="0.02"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.1"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+    </inertial>
+  </link>
+
+  <!-- 베이스와 왼쪽 바퀴를 연결 -->
+  <joint name="left_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="left_wheel"/>
+    <origin xyz="0 -0.15 0.05" rpy="1.5708 0 0"/> <!-- 베이스의 왼쪽에 위치 -->
+    <axis xyz="0 0 1"/> <!-- 회전 축 정의 -->
+  </joint>
+
+  <!-- 베이스와 오른쪽 바퀴를 연결 -->
+  <joint name="right_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="right_wheel"/>
+    <origin xyz="0 0.15 0.05" rpy="1.5708 0 0"/> <!-- 베이스의 오른쪽에 위치 -->
+    <axis xyz="0 0 1"/>
+  </joint>
+
+</robot>
