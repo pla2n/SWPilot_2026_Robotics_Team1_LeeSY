@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="simple_robot">
+
+  <!-- 매크로 정의: 기본적인 링크 -->
+  <xacro:macro name="wheel" params="name xyz">
+    <link name="${name}">
+      <visual>
+        <geometry>
+          <cylinder radius="0.05" length="0.02"/>
+        </geometry>
+        <material name="black">
+          <color rgba="0.0 0.0 0.0 1.0"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.02"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.1"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+      </inertial>
+    </link>
+
+    <!-- Joint 정의 -->
+    <joint name="${name}_joint" type="continuous">
+      <parent link="base_link"/>
+      <child link="${name}"/>
+      <origin xyz="${xyz}" rpy="1.5708 0 0"/>
+      <axis xyz="0 0 1"/>
+    </joint>
+  </xacro:macro>
+
+  <!-- 박스형 몸체 -->
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.5 0.3 0.2"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0.0 0.0 1.0 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.5 0.3 0.2"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.0"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.02" ixy="0.0" ixz="0.0" iyy="0.02" iyz="0.0" izz="0.02"/>
+    </inertial>
+  </link>
+
+  <!-- 왼쪽 바퀴 -->
+  <xacro:wheel name="left_wheel" xyz="0 -0.15 0.05"/>
+
+  <!-- 오른쪽 바퀴 -->
+  <xacro:wheel name="right_wheel" xyz="0 0.15 0.05"/>
+</robot>
