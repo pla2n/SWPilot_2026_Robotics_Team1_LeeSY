@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="default">
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    <model name="circular_path">
+      <static>true</static>
+      <link name="circular_path">
+        <!-- 바닥 -->
+        <visual name="base_plane">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>10 10</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.7 1</ambient>
+            <diffuse>0.7 0.7 0.7 1</diffuse>
+          </material>
+        </visual>
+
+        <!-- 원형 경로 (외부 검은 원) -->
+        <visual name="outer_circle">
+          <geometry>
+            <cylinder>
+              <radius>2.65</radius>
+              <length>0.01</length>
+            </cylinder>
+          </geometry>
+          <pose>0 0 0.005 0 0 0</pose>
+          <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+          </material>
+        </visual>
+        
+        <!-- 원형 경로 (내부 회색 원 덮어쓰기) -->
+        <visual name="inner_circle">
+          <geometry>
+            <cylinder>
+              <radius>2.35</radius>
+              <length>0.01</length>
+            </cylinder>
+          </geometry>
+          <pose>0 0 0.01 0 0 0</pose>
+          <material>
+            <ambient>0.7 0.7 0.7 1</ambient>
+            <diffuse>0.7 0.7 0.7 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+  </world>
+</sdf>
